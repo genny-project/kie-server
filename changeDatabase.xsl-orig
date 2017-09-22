@@ -7,12 +7,12 @@
     <xsl:output method="xml" indent="yes"/>
 
     <xsl:template match="//ds:subsystem/ds:datasources/ds:datasource[@jndi-name='java:jboss/datasources/ExampleDS']">
-        <ds:datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true" use-ccm="false">
-            <ds:connection-url>jdbc:mysql://kieserverdb:3306/kieserverdb?useSSL=false&amp;failOverReadOnly=false&amp;maxReconnects=100&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8&amp;useUnicode=true&amp;interactiveClient=true&amp;connectTimeout=60000&amp;socketTimeout=60000</ds:connection-url>
+        <ds:datasource jndi-name="java:jboss/datasources/jbpmDS" pool-name="jbpmDS" enabled="true" use-java-context="true" use-ccm="false">
+            <ds:connection-url>jdbc:mysql:loadbalance://${env.MYSQL_PORT_3306_TCP_ADDR:db}:${env.MYSQL_PORT_3306_TCP_PORT:3306}/${env.MYSQL_DATABASE:db}?failOverReadOnly=false&amp;maxReconnects=100&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8&amp;useUnicode=true&amp;interactiveClient=true&amp;connectTimeout=60000&amp;socketTimeout=60000</ds:connection-url>
             <ds:driver>mysql</ds:driver>
             <ds:security>
-                <ds:user-name>genny</ds:user-name>
-                <ds:password>password</ds:password>
+                <ds:user-name>${env.MYSQL_USER:admin}</ds:user-name>
+                <ds:password>${env.MYSQL_PASSWORD:admin}</ds:password>
             </ds:security>
             <ds:validation>
                 <ds:check-valid-connection-sql>SELECT 1</ds:check-valid-connection-sql>
