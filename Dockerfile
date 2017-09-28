@@ -31,5 +31,8 @@ RUN mkdir -p $JBOSS_HOME/modules/system/layers/base/com/mysql/jdbc/main; cd $JBO
 ADD module.xml $JBOSS_HOME/modules/system/layers/base/com/mysql/jdbc/main/
 RUN sed -i "s/mysql-connector-java/mysql-connector-java-$MYSQLCONNECTOR_VERSION/g" $JBOSS_HOME/modules/system/layers/base/com/mysql/jdbc/main/module.xml
 #RUN sed -i 's/ExampleDS/jbpmDS/g' $JBOSS_HOME/standalone/configuration/standalone.xml
-#RUN sed -i 's/ExampleDS/jbpmDS/g' $JBOSS_HOME/standalone/configuration/standalone-full.xml
+RUN sed -i 's/ExampleDS/jbpmDS/g' $JBOSS_HOME/standalone/configuration/standalone-full.xml
+ADD start_kie-wb.sh /opt/jboss/wildfly/bin/start_kie-wb.sh
+RUN chown jboss:root /opt/jboss/wildfly/bin/start_kie-wb.sh
+RUN chmod a+x /opt/jboss/wildfly/bin/start_kie-wb.sh
 
